@@ -1,0 +1,41 @@
+
+
+
+
+.app-login__logo{
+    width: 150px;
+    margin: 70px auto 30px;
+    display: block;
+  }
+  
+  
+  .button-login {
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 2rem;
+    background-color: #426cb4; 
+  }
+  
+  .app-inputs {
+    color: #ffffff;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    background-color: #426cb4;
+  
+    &.item-md.item-block .item-inner{
+      border-bottom: 2px solid #83aff5 ;
+    }
+  
+    .text-input::-webkit-input-placeholder{
+      color: #426cb4;
+    }
+  
+    >.item-inner{
+      padding-left: 20px;
+    }
+  }
+  .colorToolbar{
+     background-color: #426cb4;
+  }
+ 
+  

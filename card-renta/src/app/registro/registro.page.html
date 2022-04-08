@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-row>
+    <img class="app-login__logo" src="../../assets/card.JPG">
+  </ion-row>
+      <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-list>
+                     <form>
+                        <!-- Nombre -->
+                        <ion-item lines="none" class="app-inputs" color="background">
+                          <ion-input placeholder="nombre" type="text"></ion-input>
+                        </ion-item>
+                      <!-- Apellido -->
+                        <ion-item lines="none" class="app-inputs" color="background">
+                          <ion-input placeholder="apellido" type="text"></ion-input>
+                        </ion-item>
+                      <!-- Correo -->
+                        <ion-item lines="none" class="app-inputs" color="background">
+                          <ion-input placeholder="correo" type="text"></ion-input>
+                        </ion-item>
+                        <!-- Password -->
+                        <ion-item lines="none" class="app-inputs" color="background">
+                          <ion-input placeholder="password" type="password">
+                          </ion-input>
+                        </ion-item>
+
+                        <!-- Repetir Password -->
+                        <ion-item lines="none" class="app-inputs" color="background">
+                          <ion-input placeholder="repetir password" type="password">
+                          </ion-input>
+                        </ion-item>
+                    
+                    <!-- Button -->
+                    <ion-button class="button-login"  color="primary" size="block" (click)="crearCuenta()">
+                      Crear cuenta
+                    </ion-button>
+                  </form>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>
