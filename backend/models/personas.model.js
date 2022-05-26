@@ -1,6 +1,9 @@
 
-module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('personas', {
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/bd.service');
+
+
+  const Personas =  sequelize.define('personas', {
       per_codigo: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -20,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true
       },
       per_telefono: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: true
       },
       per_latitud: {
@@ -36,7 +39,9 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true
       }
     }, {
-      tableName: 'personas'
+      tableName: 'personas',
+      timestamps: false
     });
-  };
+  
+    module.exports = {Personas};
   

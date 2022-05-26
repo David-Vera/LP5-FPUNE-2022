@@ -1,6 +1,8 @@
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/bd.service');
 
-module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('reservas', {
+
+const Reservas =  sequelize.define('reservas', {
       res_codigo: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -11,8 +13,8 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      res_tiempo: {
-        type: DataTypes.STRING,
+      res_persona: {
+        type: DataTypes.INTEGER,
         allowNull: true
       },
       res_monto_pagar: {
@@ -22,9 +24,16 @@ module.exports = function(sequelize, DataTypes) {
       res_fecha: {
         type: DataTypes.DATE,
         allowNull: true
+      },
+      res_estado: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     }, {
-      tableName: 'reservas'
+      tableName: 'reservas',
+      timestamps: false
     });
-  };
+
+    module.exports = {Reservas};
+  
   

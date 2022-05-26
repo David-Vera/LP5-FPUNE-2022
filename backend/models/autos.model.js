@@ -1,5 +1,8 @@
-module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('autos', {
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/bd.service');
+
+
+const Autos =  sequelize.define('autos', {
       aut_codigo: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -33,9 +36,17 @@ module.exports = function(sequelize, DataTypes) {
       aut_longitud: {
         type: DataTypes.STRING,
         allowNull: true
+      },
+      aut_estado: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     }, {
-      tableName: 'autos'
+      tableName: 'autos',
+      timestamps: false
     });
-  };
+
+  
+
+  module.exports = {Autos};
   

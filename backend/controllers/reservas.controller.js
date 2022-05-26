@@ -1,14 +1,13 @@
 // Llamada del modelo reservas
-const reservas = require('../models').reservas.model;
+const { Reservas } = require('../models/reservas.model')
+const { sequelize } = require('../config/bd.service');
+const sqlString = require('sqlstring');
 
 // Guardar reserva
 function create(req, res){
 
-    console.log(req.body);
-
-    reservas.create(req.body)
+    Reservas.create(req.body)
     .then(reserva=>{
-        console.log('ok ');
         res.status(200).send({reserva});
     })
     .catch(err=>{
@@ -21,7 +20,7 @@ function create(req, res){
 function update(req, res){
     var id = req.params.id;
 
-    reservas.findOne({ where: { per_codigo: id } })
+    Reservas.findOne({ where: { res_persona: id } })
     
     .then(reserva => {
         if (reserva != null) {
@@ -48,7 +47,7 @@ function update(req, res){
 function getById(req, res){
     var id = req.params.id;
     
-    reservas.findOne({ where: { per_codigo: id } })
+    Reservas.findOne({ where: { res_codigo: id } })
     .then(reserva=>{
         res.status(200).send({reserva});
     })
@@ -63,16 +62,16 @@ function remove(req, res){
    
     var id = req.params.id;
 
-    reservas.findOne({ where: { 
-        per_codigo: id,
+    Reservas.findOne({ where: { 
+        res_codigo: id,
     } })
     
     .then(reservaBuscar => {
 
         if (reservaBuscar != null){
-            reservas.destroy({
+            Reservas.destroy({
                 where: {
-                    per_codigo : id,
+                    res_codigo : id,
                 }
             })
             .then(reserva => {
@@ -93,10 +92,8 @@ function remove(req, res){
 // FUNCTION DE LISTA DE TODAS LAS reservas
 
 function list(req, res){
-   
 
-
-    reservas.findAll()
+    Reservas.findAll()
     
     .then(reservalista => {
         res.status(200).send({reservalista});
@@ -107,6 +104,27 @@ function list(req, res){
     });
 }
 
+async function listReserva (req, res){
+
+    var estado = req.params.estado;
+    let result = null;
+
+    var sql = 'select r.res_monto_pagar, r.res_fecha, r.res_estado, a.aut_descripcion, a.aut_ano, a.aut_marca  ' +
+    'from reservas r ' +
+    'inner join autos a on a.aut_codigo = r.res_auto where r.res_estado = '+ sqlString.escape(estado);
+
+    result = await sequelize.query(sql);
+    
+    let reservas = result[0];
+   
+    if(reservas != null){
+        res.status(200).send({reservas});
+    }else{
+        res.status(500).send({msg : 'no existe reservas'});
+    }
+   
+}
+
 module.exports={
-    list, getById, create, update, remove
+    list, getById, create, update, remove, listReserva
 }

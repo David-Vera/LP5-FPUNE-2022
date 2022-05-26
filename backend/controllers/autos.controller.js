@@ -1,13 +1,12 @@
 // Llamada del modelo autos
-const autos = require('../models/autos.model');
+const { Autos } = require('../models/autos.model')
 
 
 // Guardar auto
 function create(req, res){
-    console.log(req.body);
-    autos.create(req.body)
-    .then(auto=>{
 
+    Autos.create(req.body)
+    .then(auto=>{
         res.status(200).send({
             success: 'OK',
             auto
@@ -23,7 +22,7 @@ function create(req, res){
 function update(req, res){
     var id = req.params.id;
 
-    autos.findOne({ where: { per_codigo: id } })
+    Autos.findOne({ where: { aut_codigo: id } })
     
     .then(auto => {
         if (auto != null) {
@@ -53,7 +52,7 @@ function update(req, res){
 function getById(req, res){
     var id = req.params.id;
     
-    autos.findOne({ where: { per_codigo: id } })
+    Autos.findOne({ where: { aut_codigo: id } })
     .then(auto=>{
         res.status(200).send({
             success: 'OK',
@@ -71,16 +70,16 @@ function remove(req, res){
    
     var id = req.params.id;
 
-    autos.findOne({ where: { 
-        per_codigo: id,
+    Autos.findOne({ where: { 
+        aut_codigo: id,
     } })
     
     .then(autoBuscar => {
 
         if (autoBuscar != null){
-            autos.destroy({
+            Autos.destroy({
                 where: {
-                    per_codigo : id,
+                    aut_codigo : id,
                 }
             })
             .then(auto => {
@@ -104,9 +103,9 @@ function remove(req, res){
 
 function list(req, res){
    
-
-
-    autos.findAll()
+    Autos.findAll({ where: { 
+        aut_estado: 'disponible',
+    } })
     
     .then(autolista => {
         res.status(200).send({

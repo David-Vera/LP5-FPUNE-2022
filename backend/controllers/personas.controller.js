@@ -1,22 +1,23 @@
 // Llamada del modelo personas
-const personas = require('../models').personas.model;
+const { Personas } = require('../models/personas.model')
 
 
 //Consulta por correo y pass
 function ingreso(req, res){
 
-    var users = new personas();
+    console.log('test', req.body);
+
     var params = req.body;
 
-    if(params.email && params.pass){
-      users.email = params.email;
-      users.pass = params.pass;
- 
-        personas.findOne({ where: { 
-            per_email: users.email,
-            per_pass: users.pass
-        } })
+    if(params.correo && params.pass){
+
         
+      Personas.findOne({ where: { 
+            per_correo: params.correo,
+            per_password: params.pass
+        } })
+     
+
         .then(personaIngresar => {
 
             if (personaIngresar != null){
@@ -43,7 +44,7 @@ function create(req, res){
 
     console.log(req.body);
 
-    personas.create(req.body)
+    Personas.create(req.body)
     .then(persona=>{
         console.log('ok ');
         res.status(200).send({persona});
@@ -58,7 +59,7 @@ function create(req, res){
 function update(req, res){
     var id = req.params.id;
 
-    personas.findOne({ where: { per_codigo: id } })
+    Personas.findOne({ where: { per_codigo: id } })
     
     .then(persona => {
         if (persona != null) {
@@ -83,9 +84,10 @@ function update(req, res){
 // Buscar persona por codigo
 
 function getById(req, res){
+
     var id = req.params.id;
     
-    personas.findOne({ where: { per_codigo: id } })
+    Personas.findOne({ where: { per_codigo: id } })
     .then(persona=>{
         res.status(200).send({persona});
     })
@@ -100,14 +102,14 @@ function remove(req, res){
    
     var id = req.params.id;
 
-    personas.findOne({ where: { 
+    Personas.findOne({ where: { 
         per_codigo: id,
     } })
     
     .then(personaBuscar => {
 
         if (personaBuscar != null){
-            personas.destroy({
+            Personas.destroy({
                 where: {
                     per_codigo : id,
                 }
@@ -131,8 +133,7 @@ function remove(req, res){
 
 function list(req, res){
    
-    console.log('llega');
-    personas.findAll()
+    Personas.findAll()
     
     .then(personalista => {
         res.status(200).send({personalista});
