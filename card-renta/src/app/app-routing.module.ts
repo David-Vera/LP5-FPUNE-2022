@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./recuperar-password/recuperar-password.module').then( m => m.RecuperarPasswordPageModule)
   },
   {
-    path: 'carga-card',
+    path: 'carga-card/:id',
     loadChildren: () => import('./carga-card/carga-card.module').then( m => m.CargaCardPageModule)
   },
   {

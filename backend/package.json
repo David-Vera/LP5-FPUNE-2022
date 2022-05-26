@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon ./config/server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +14,10 @@
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "nodemon": "^2.0.15",
-    "pg": "^8.0.0",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.6",
-    "sequelize-cli": "^5.5.1"
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.17.0",
+    "sqlstring": "^2.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
