@@ -3,17 +3,36 @@
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Menu</ion-title>
+        <ion-title>Card Renta</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>Card disponibles</ion-item>
-        <ion-item>Mi perfil</ion-item>
-        <ion-item>Mis reservas</ion-item>
-        <ion-item>Mis pagos</ion-item>
-        <ion-item>Acerca de Card renta</ion-item>
-        <ion-item>Cerrar sesión</ion-item>
+        <ion-menu-toggle>
+          <ion-item routerLink="/listado-card">
+            <ion-icon name="car-outline"></ion-icon> Card disponibles
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/perfil">
+            <ion-icon name="person-circle-outline"></ion-icon> Mi perfil
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/reserva">
+            <ion-icon name="briefcase-outline"></ion-icon> Mis reservas
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/reserva-pagada">
+            <ion-icon name="cash-outline"></ion-icon> Mis pagos
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item (click)="onCerrarSesion()">
+            <ion-icon name="power-outline"></ion-icon> Cerrar sesión
+          </ion-item>
+        </ion-menu-toggle>   
       </ion-list>
     </ion-content>
   </ion-menu>

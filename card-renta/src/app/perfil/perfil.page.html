@@ -1,9 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Perfil</ion-title>
+<ion-header no-border>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+        <ion-button (click)="mostrarMenu()" color="primary">
+          <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title  text-capitalize>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <ion-grid>
@@ -15,26 +19,22 @@
                 </ion-list-header>
                     <!-- Nombre -->
                     <ion-item lines="none" class="app-inputs" color="background">
-                      <ion-input placeholder="nombre" type="text"></ion-input>
-                    </ion-item>
-                  <!-- Apellido -->
-                    <ion-item lines="none" class="app-inputs" color="background">
-                      <ion-input placeholder="apellido" type="text"></ion-input>
+                      <ion-input placeholder="nombre y apellido" type="text" [(ngModel)]="nombre"></ion-input>
                     </ion-item>
                   <!-- Correo -->
                     <ion-item lines="none" class="app-inputs" color="background">
-                      <ion-input placeholder="correo" type="text"></ion-input>
+                      <ion-input placeholder="correo" type="text" [(ngModel)]="correo" disabled=""></ion-input>
                     </ion-item>
                   <!-- Telefono -->
                     <ion-item lines="none" class="app-inputs" color="background">
-                      <ion-input placeholder="telefono" type="tel"></ion-input>
+                      <ion-input placeholder="telefono" type="tel" [(ngModel)]="telefono"></ion-input>
                     </ion-item>
                   <!-- direccion -->
                     <ion-item lines="none" class="app-inputs" color="background">
-                      <ion-input placeholder="direccion" type="text"></ion-input>
+                      <ion-input placeholder="direccion" type="text" [(ngModel)]="direccion"></ion-input>
                     </ion-item>
                   <!-- Button -->
-                  <ion-button class="button-login"  color="primary" size="block">
+                  <ion-button class="button-login"  color="primary" size="block" (click)="actualizar()">
                     Actualizar
                   </ion-button>
             </ion-list>

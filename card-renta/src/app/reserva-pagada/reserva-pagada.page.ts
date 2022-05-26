@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CardServicesService } from '../card-services.service';
+import { MenuController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reserva-pagada',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservaPagadaPage implements OnInit {
 
-  constructor() { }
+  reservas;
+
+  constructor(public servicio: CardServicesService, private menuCtrl: MenuController, public toastCtrl: ToastController) { }
 
   ngOnInit() {
+    this.listadoReserva();
   }
+
+  mostrarMenu(){
+    this.menuCtrl.open();
+  }
+
+  listadoReserva(){
+    const valor = 'pagado';
+    this.servicio.getListReservas(valor).subscribe(res => {
+       this.reservas = res['reservas'];
+    })
+  }
+
+
 
 }

@@ -7,21 +7,19 @@
     <ion-row>
         <ion-col>
             <ion-list>
-              <form>
-                <!-- Username -->
+                <!-- correo -->
                 <ion-item lines="none" class="app-inputs" color="background">
-                  <ion-input placeholder="correo" type="text"></ion-input>
+                  <ion-input placeholder="correo" type="text" [(ngModel)]="correo"></ion-input>
                 </ion-item>
                 <!-- Password -->
                 <ion-item lines="none" class="app-inputs" color="background">
-                  <ion-input placeholder="password" type="password">
+                  <ion-input placeholder="password" type="password" [(ngModel)]="password">
                   </ion-input>
                 </ion-item>
                 <!-- Button -->
                 <ion-button class="button-login"  color="primary" size="block" (click)="ingresar()">
                   Ingresar
                 </ion-button>
-              </form>
           </ion-list>
         </ion-col>
       </ion-row>
@@ -30,9 +28,9 @@
   <ion-button  class="button-recover" fill="clear" size="block" (click)="registro()">
       Crear cuenta
   </ion-button >
-
+<!--
   <ion-button  class="button-recover" fill="clear" size="block" (click)="recuperarPassword()">
       Recuperar seña
   </ion-button >
-
+-->
 </ion-content>

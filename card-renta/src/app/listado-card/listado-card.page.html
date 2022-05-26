@@ -1,67 +1,39 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <ion-toolbar >
     <ion-buttons slot="start">
         <ion-button (click)="mostrarMenu()" color="primary">
           <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
         </ion-button>
     </ion-buttons>
-    <ion-title>Autos</ion-title>
+    <ion-title  text-capitalize>Autos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+   
+    
+
   <ion-list>
     <ion-list-header>
-        <ion-label>Autos disponibles para la reserva</ion-label>
+      <ion-label>Autos para la reserva</ion-label>
     </ion-list-header>
-    <ion-searchbar placeholder="Buscar"></ion-searchbar>
-    <ion-item-sliding>
+    <ion-item-sliding  *ngFor="let item of autos">
+      <ion-list-header>
+        <strong>{{ item.aut_descripcion }}</strong>
+        <ion-badge>{{ item.aut_estado }}</ion-badge>
+      </ion-list-header>
       <ion-item>
         <ion-avatar slot="start">
           <img src="../../assets/rush.jpg">
         </ion-avatar>
-        <ion-label>Toyota premium 2010</ion-label>
+        <ion-label>{{ item.aut_marca }}<strong>/</strong>{{ item.aut_ano }} <strong> costo:</strong>  {{ item.aut_costo_alquiler }}</ion-label>
       </ion-item>
       <ion-item-options side="end">
-          <ion-item-option>Reservar</ion-item-option>
-          <ion-item-option color="secondary">Editar</ion-item-option>
+          <ion-item-option (click)="reservar(item)">Reservar</ion-item-option>
+          <ion-item-option color="secondary" (click)="editar(item)">Editar</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/rush.jpg">
-      </ion-avatar>
-      <ion-label>Toyota Rush 2021</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/rush.jpg">
-      </ion-avatar>
-      <ion-label>Chevrolet Tracker 2019</ion-label>
-    </ion-item>
-    <ion-item-sliding>
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="../../assets/rush.jpg">
-        </ion-avatar>
-        <ion-label>Toyota premium 2001</ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-          <ion-item-option>Reservar</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/rush.jpg">
-      </ion-avatar>
-      <ion-label>Toyota Hilux 2021</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/rush.jpg">
-      </ion-avatar>
-      <ion-label>Chevrolet Tracker 2021</ion-label>
-    </ion-item>
   </ion-list>
 
 </ion-content>
