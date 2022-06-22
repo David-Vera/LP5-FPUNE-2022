@@ -9,6 +9,10 @@ const Autos =  sequelize.define('autos', {
         autoIncrement : true,
         primaryKey: true
       },
+      aut_persona_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       aut_descripcion: {
         type: DataTypes.STRING,
         allowNull: true

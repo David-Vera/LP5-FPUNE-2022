@@ -20,6 +20,8 @@ export class CargaCardPage implements OnInit {
   longitud;
   codigo;
   boton;
+  accesoAuto;
+  personaId;
   constructor(public servicio: CardServicesService, 
               public toastCtrl: ToastController,
               public router: Router,
@@ -34,6 +36,16 @@ export class CargaCardPage implements OnInit {
           this.datoAuto(params.id);
         }
     });
+
+   
+  }
+
+  ionViewWillEnter(){
+    if(localStorage.getItem('acceso') == 'Cliente'){
+      this.accesoAuto = false;
+    }else{
+      this.accesoAuto = true;
+    }
   }
  
   datoAuto(id){
@@ -50,6 +62,7 @@ export class CargaCardPage implements OnInit {
   }
 
   guardar(){
+    this.personaId = localStorage.getItem('persona');
     const dataAuto = {
       aut_descripcion: this.descripcion,
       aut_marca: this.marca,
@@ -58,7 +71,8 @@ export class CargaCardPage implements OnInit {
       aut_ano: this.ano,
       aut_kilometraje: this.Kilometraje,
       aut_costo_alquiler: this.costo,
-      aut_estado: 'disponible'
+      aut_estado: 'disponible',
+      aut_persona_id: this.personaId
     }
 
     if(this.codigo){

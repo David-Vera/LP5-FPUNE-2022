@@ -14,20 +14,20 @@ export class ReservaPagadaPage implements OnInit {
   constructor(public servicio: CardServicesService, private menuCtrl: MenuController, public toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.listadoReserva();
+   // this.listadoReserva();
   }
 
   mostrarMenu(){
     this.menuCtrl.open();
   }
 
-  listadoReserva(){
+ /* listadoReserva(){
     const valor = 'pagado';
     this.servicio.getListReservas(valor).subscribe(res => {
        this.reservas = res['reservas'];
     })
   }
-
+*/
 
 
 }

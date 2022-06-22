@@ -17,6 +17,10 @@ const Reservas =  sequelize.define('reservas', {
         type: DataTypes.INTEGER,
         allowNull: true
       },
+      res_auto_persona: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
       res_monto_pagar: {
         type: DataTypes.DOUBLE,
         allowNull: true

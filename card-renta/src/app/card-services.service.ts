@@ -15,6 +15,10 @@ export class CardServicesService {
     return this.http.get(environment.url + 'autos');
   }
 
+  getListAutosId = (id) => {
+    return this.http.get(environment.url + 'autos/' +id);
+  }
+
 
   postAutos = (data) => {
     return this.http.post(environment.url + 'auto', data);
@@ -54,10 +58,14 @@ export class CardServicesService {
   //Reserva
   postReserva = (data) => {
     return this.http.post(environment.url + 'reserva', data);
+  } 
+
+  getListReservasCliente = (estado, id) => {
+    return this.http.get(environment.url + 'reservas-cliente/' +estado+'/'+id);
   }
 
-  getListReservas = (estado) => {
-    return this.http.get(environment.url + 'reservas/' +estado);
+  getListReservasEmpresa = (estado, id) => {
+    return this.http.get(environment.url + 'reservas-empresa/' +estado+'/'+id);
   }
 
   putReserva = (data, id) => {

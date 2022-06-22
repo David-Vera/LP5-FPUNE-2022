@@ -37,6 +37,10 @@ const { sequelize } = require('../config/bd.service');
       per_password: {
         type: DataTypes.STRING,
         allowNull: true
+      },
+      per_nivel: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     }, {
       tableName: 'personas',

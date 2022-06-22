@@ -16,6 +16,12 @@
         <ion-row>
             <ion-col>
                 <ion-list>
+                        <ion-item class="app-inputs" color="background">
+                          <ion-select interface="popover" placeholder="Tipo de cuenta" (ionChange)="handleChange($event)">
+                            <ion-select-option value="Cliente">Cliente</ion-select-option>
+                            <ion-select-option value="Empresa">Empresa</ion-select-option>
+                          </ion-select>
+                        </ion-item>
                         <!-- Nombre -->
                         <ion-item lines="none" class="app-inputs" color="background">
                           <ion-input placeholder="nombre y apellido" type="text" [(ngModel)]="nombre"></ion-input>

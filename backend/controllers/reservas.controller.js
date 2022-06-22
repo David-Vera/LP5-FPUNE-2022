@@ -20,7 +20,7 @@ function create(req, res){
 function update(req, res){
     var id = req.params.id;
 
-    Reservas.findOne({ where: { res_persona: id } })
+    Reservas.findOne({ where: { res_codigo: id } })
     
     .then(reserva => {
         if (reserva != null) {
@@ -104,14 +104,22 @@ function list(req, res){
     });
 }
 
-async function listReserva (req, res){
+async function listReservaCliente (req, res){
 
+    var id = req.params.id;
     var estado = req.params.estado;
     let result = null;
-
-    var sql = 'select r.res_monto_pagar, r.res_fecha, r.res_estado, a.aut_descripcion, a.aut_ano, a.aut_marca  ' +
-    'from reservas r ' +
-    'inner join autos a on a.aut_codigo = r.res_auto where r.res_estado = '+ sqlString.escape(estado);
+    if(estado == 'all'){
+        var sql = 'select r.res_monto_pagar, r.res_fecha, r.res_estado, a.aut_descripcion, a.aut_ano, a.aut_marca, a.aut_kilometraje, p.per_nombre, r.res_codigo , r.res_auto, r.res_persona, r.res_auto_persona, p.per_nombre, p.per_correo, p.per_telefono, p.per_direccion ' +
+        'from reservas r ' +
+        'inner join personas p on p.per_codigo = r.res_persona '+
+        'inner join autos a on a.aut_codigo = r.res_auto where  r.res_persona = '+id;
+    }else{
+        var sql = 'select r.res_monto_pagar, r.res_fecha, r.res_estado, a.aut_descripcion, a.aut_ano, a.aut_marca, a.aut_kilometraje, p.per_nombre, r.res_codigo , r.res_auto, r.res_persona, r.res_auto_persona, p.per_nombre, p.per_correo, p.per_telefono, p.per_direccion  ' +
+        'from reservas r ' +
+        'inner join personas p on p.per_codigo = r.res_persona '+
+        'inner join autos a on a.aut_codigo = r.res_auto where r.res_estado = '+ sqlString.escape(estado) + 'and r.res_persona = '+id;
+    }
 
     result = await sequelize.query(sql);
     
@@ -125,6 +133,37 @@ async function listReserva (req, res){
    
 }
 
+async function listReservaEmpresa (req, res){
+
+  
+    var id = req.params.id;
+    var estado = req.params.estado;
+    let result = null;
+
+    if(estado == 'all'){
+        var sql = 'select r.res_monto_pagar, r.res_fecha, r.res_estado, a.aut_descripcion, a.aut_ano, a.aut_marca, a.aut_kilometraje, p.per_nombre, r.res_codigo, r.res_auto, r.res_persona, r.res_auto_persona, p.per_nombre, p.per_correo, p.per_telefono, p.per_direccion ' +
+        'from reservas r ' +
+       'inner join personas p on p.per_codigo = r.res_persona '+
+       'inner join autos a on a.aut_codigo = r.res_auto where r.res_auto_persona = '+id;
+    }else{
+        var sql = 'select r.res_monto_pagar, r.res_fecha, r.res_estado, a.aut_descripcion, a.aut_ano, a.aut_marca, a.aut_kilometraje, p.per_nombre, r.res_codigo, r.res_auto, r.res_persona, r.res_auto_persona, p.per_nombre, p.per_correo, p.per_telefono, p.per_direccion ' +
+        'from reservas r ' +
+        'inner join personas p on p.per_codigo = r.res_persona '+
+        'inner join autos a on a.aut_codigo = r.res_auto where r.res_estado = '+ sqlString.escape(estado) + 'and r.res_auto_persona = '+id;
+    }
+ 
+    result = await sequelize.query(sql);
+    
+    let reservas = result[0];
+   
+    if(reservas != null){
+        res.status(200).send({reservas});
+    }else{
+        res.status(500).send({msg : 'no existe reservas'});
+    }
+   
+}
+
 module.exports={
-    list, getById, create, update, remove, listReserva
+    listReservaCliente, listReservaEmpresa, getById, create, update, remove, list
 }

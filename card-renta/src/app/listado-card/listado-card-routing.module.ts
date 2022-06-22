@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ListadoCardPage } from './listado-card.page';
+import { PipesModule } from '../pipes/pipes.module';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), PipesModule],
   exports: [RouterModule],
 })
 export class ListadoCardPageRoutingModule {}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardServicesService } from '../card-services.service';
 import { MenuController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reserva',
@@ -10,38 +11,94 @@ import { MenuController, ToastController } from '@ionic/angular';
 export class ReservaPage implements OnInit {
 
   reservas;
-
-  constructor(public servicio: CardServicesService, private menuCtrl: MenuController, public toastCtrl: ToastController) { }
+  accesoAuto;
+  estado = 'all';
+  sumaTotal = 0;
+  constructor(public servicio: CardServicesService, private menuCtrl: MenuController, public toastCtrl: ToastController, public router: Router) { }
 
   ngOnInit() {
-    this.listadoReserva();
+   
   }
 
   mostrarMenu(){
     this.menuCtrl.open();
   }
 
+
+  ionViewWillEnter(){
+    this.listadoReserva();
+   
+  }
   listadoReserva(){
-    const valor = 'pendiente';
-    this.servicio.getListReservas(valor).subscribe(res => {
+
+    this.sumaTotal = 0;
+    if(localStorage.getItem('acceso') == 'Cliente'){
+      this.accesoAuto = false;
+      
+      this.servicio.getListReservasCliente(this.estado, localStorage.getItem('persona')).subscribe(res => {
+
+         this.reservas = res['reservas'];
+         for(let reserva of this.reservas){
+          this.sumaTotal = this.sumaTotal  + Number(reserva.res_monto_pagar);
+         }
+
+      })
+     
+    }else{
+  
+      
+      this.accesoAuto = true;
+       this.servicio.getListReservasEmpresa(this.estado, localStorage.getItem('persona')).subscribe(res => {
+        console.log(res);
+        
        this.reservas = res['reservas'];
+       for(let reserva of this.reservas){
+        this.sumaTotal = this.sumaTotal  + Number(reserva.res_monto_pagar);
+       }
     })
+    }
+  
+   
   }
 
   pagar(item){
+
       const data = {
-        aut_ano: item.aut_ano,
-        aut_descripcion: item.aut_descripcion,
-        aut_marca: item.aut_marca,
-        res_estado: 'pagado',
-        res_fecha: item.res_fecha,
-        res_monto_pagar: item.res_monto_pagar,
+         res_auto:item.res_auto,
+         res_persona: item.res_persona,
+         res_monto_pagar: item.aut_costo_alquiler,
+         res_fecha: item.res_fecha,
+         res_estado: 'pagado',
+         res_auto_persona: item.res_auto_persona
       }
 
-      this.servicio.putReserva(data, localStorage.getItem('persona')).subscribe(res => {
-        this.presentToast('La reserva de auto fue pagada');
-        this.listadoReserva();
-     })
+      this.servicio.putReserva(data, item.res_codigo).subscribe(res => {
+       
+         const dataAuto = {
+          aut_descripcion: item.aut_descripcion,
+          aut_marca: item.aut_marca,
+          aut_ano: item.aut_ano,
+          aut_kilometraje: item.aut_kilometraje,
+          aut_costo_alquiler: item.res_monto_pagar,
+          aut_estado: 'disponible'
+          
+        }
+    
+        this.servicio.putAuto(dataAuto, item.res_auto).subscribe(res => {
+           this.presentToast('La reserva de auto fue pagada');
+            this.listadoReserva();
+        });
+       
+     
+
+
+      }) 
+    
+  }
+
+  detalle(item){
+ 
+    this.router.navigate(['/cliente',item.res_persona]);
   }
 
 
@@ -53,5 +110,10 @@ export class ReservaPage implements OnInit {
     });
 
     toast.present();
+  }
+
+  handleChange(e) {
+   this.estado = e.detail.value;
+   this.listadoReserva();
   }
 }

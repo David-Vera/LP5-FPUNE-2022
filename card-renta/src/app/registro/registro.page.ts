@@ -14,6 +14,7 @@ export class RegistroPage implements OnInit {
   correo;
   password;
   password2;
+  nivel;
 
   constructor(public servicio: CardServicesService,
               public toastCtrl: ToastController,
@@ -29,7 +30,8 @@ export class RegistroPage implements OnInit {
       const dataCuenta = {
         per_nombre: this.nombre,
         per_correo: this.correo,
-        per_password: this.password
+        per_password: this.password,
+        per_nivel: this.nivel
       };
 
       this.servicio.postCuenta(dataCuenta).subscribe(res => {
@@ -60,6 +62,12 @@ export class RegistroPage implements OnInit {
     this.correo = '';
     this.password = '';
     this.password2 = '';
+  }
+
+
+
+  handleChange(e) {
+    this.nivel = e.detail.value;
   }
 
 }

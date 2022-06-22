@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'reserva-pagada',
     loadChildren: () => import('./reserva-pagada/reserva-pagada.module').then( m => m.ReservaPagadaPageModule)
   },
+  {
+    path: 'cliente/:id',
+    loadChildren: () => import('./cliente/cliente.module').then( m => m.ClientePageModule)
+  },
 ];
 
 @NgModule({

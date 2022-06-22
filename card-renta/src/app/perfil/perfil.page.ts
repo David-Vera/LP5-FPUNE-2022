@@ -13,6 +13,7 @@ export class PerfilPage implements OnInit {
   correo;
   telefono;
   direccion;
+  cuenta;
   constructor(public servicio: CardServicesService, public toastCtrl: ToastController, private menuCtrl: MenuController) { }
 
   ngOnInit() {
@@ -22,12 +23,14 @@ export class PerfilPage implements OnInit {
       this.correo = res['persona'].per_correo;
       this.telefono = res['persona'].per_telefono;
       this.direccion = res['persona'].per_direccion;
+      this.cuenta = res['persona'].per_nivel;
     });
   }
 
 
   actualizar(){
       const data = {
+        per_nivel: this.cuenta,
         per_correo: this.correo,
         per_direccion: this.direccion,
         per_nombre: this.nombre,

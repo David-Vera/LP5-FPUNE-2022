@@ -21,6 +21,7 @@ export class HomePage {
       this.servicio.postIngreso(this.correo, this.password).subscribe(res => {
          this.router.navigate(['/listado-card']);
          localStorage.setItem('persona', res['personaIngresar'].per_codigo);
+         localStorage.setItem('acceso', res['personaIngresar'].per_nivel)
          this.presentToast('Ingreso a la app con éxito');
       })
     }else{

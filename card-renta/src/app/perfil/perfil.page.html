@@ -17,6 +17,12 @@
                 <ion-list-header>
                     <ion-label>Datos de mi cuenta</ion-label>
                 </ion-list-header>
+                     <!-- Tipo de cuenta -->
+
+                    <ion-item lines="none" class="app-inputs" color="background">
+                      <ion-label>Tipo de cuenta -></ion-label>
+                      <ion-input placeholder="Tipo de cuenta" type="text" [(ngModel)]="cuenta" disabled=""></ion-input>
+                    </ion-item>
                     <!-- Nombre -->
                     <ion-item lines="none" class="app-inputs" color="background">
                       <ion-input placeholder="nombre y apellido" type="text" [(ngModel)]="nombre"></ion-input>

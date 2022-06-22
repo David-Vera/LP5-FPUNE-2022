@@ -12,6 +12,7 @@ export class AppComponent {
   
   onCerrarSesion() {
     localStorage.removeItem('persona');
+    localStorage.removeItem('acceso');
     this.router.navigate(['/home']);
 
   }

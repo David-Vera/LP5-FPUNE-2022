@@ -1,0 +1,40 @@
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" text-capitalize>Datos del Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-list>
+                <ion-list-header>
+                    <ion-label>Detalle del cliente</ion-label>
+                </ion-list-header>
+                  
+                    <!-- Nombre -->
+                    <ion-item lines="none" class="app-inputs" color="background">
+                      <ion-input placeholder="nombre y apellido" type="text" [(ngModel)]="nombre" disabled=""></ion-input>
+                    </ion-item>
+                  <!-- Correo -->
+                    <ion-item lines="none" class="app-inputs" color="background">
+                      <ion-input placeholder="correo" type="text" [(ngModel)]="correo" disabled=""></ion-input>
+                    </ion-item>
+                  <!-- Telefono -->
+                    <ion-item lines="none" class="app-inputs" color="background">
+                      <ion-input placeholder="telefono" type="tel" [(ngModel)]="telefono" disabled=""></ion-input>
+                    </ion-item>
+                  <!-- direccion -->
+                    <ion-item lines="none" class="app-inputs" color="background">
+                      <ion-input placeholder="direccion" type="text" [(ngModel)]="direccion" disabled=""></ion-input>
+                    </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

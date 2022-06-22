@@ -43,7 +43,7 @@
 
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="accesoAuto">
   <ion-button color="primary"
               expand="block"
               (click)="guardar()"

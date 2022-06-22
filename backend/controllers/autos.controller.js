@@ -119,6 +119,26 @@ function list(req, res){
     });
 }
 
+function listId(req, res){
+
+    var id = req.params.id;
+   
+    Autos.findAll({ where: { 
+        aut_persona_id: id
+    } })
+    
+    .then(autolista => {
+        res.status(200).send({
+            success: 'OK',
+            autolista
+        });
+      
+    })
+    .catch(err => {
+        res.status(500).send({msg : 'no existe autos'});
+    });
+}
+
 module.exports={
-    list, getById, create, update, remove
+    list, listId, getById, create, update, remove
 }
